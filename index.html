@@ -34,6 +34,7 @@
     .drop-target{min-height:64px;padding:12px;border-radius:10px;border:2px dashed #e6eefb;background:#fff}
     .dnd-item{padding:10px;border-radius:10px;border:1px dashed #cbd5e1;background:#fcfeff;cursor:grab}
     footer{margin-top:20px;text-align:center;color:var(--muted);font-size:13px}
+    audio{margin-top:10px; width:100%}
     @media (max-width:980px){main{grid-template-columns:1fr} .logo{width:56px;height:56px}}
   </style>
 </head>
@@ -95,20 +96,21 @@
 
     <footer>
       Dibuat untuk penelitian: <strong>Model Pengembangan Alat Peraga Edukatif Digital berbasis Nilai Budaya Lokal — Kediri</strong>.
-    <p class='small'>Pemilik produk: <strong>INTAN PRASTIHASTARI WIJAYA</strong> bekerjasama dengan <strong>CV. Mitra Utama Consultindo</strong>.</p></footer>
+      <p class='small'>Pemilik produk: <strong>INTAN PRASTIHASTARI WIJAYA</strong> bekerjasama dengan <strong>CV. Mitra Utama Consultindo</strong>.</p>
+    </footer>
   </div>
 
 <script>
-/* ---------- Data (Bahasa Indonesia, cocok PAUD/TK) ---------- */
+/* ---------- Data ---------- */
 const STORY = {
   title: "Legenda Kotak Berukir Pasar Kediri",
   scenes: [
-    {id:"s1", img:"assets/scene1.svg", text:"Di pagi hari, Siti datang ke pasar tradisional Kediri. Ia menemukan sebuah kotak kayu yang berukir indah. Kotak itu membuat Siti ingin tahu tentang cerita di baliknya.", choices:[{text:"Buka kotak bersama pedagang","goto":"s2a"},{text:"Bawa pulang dan tanya keluarga","goto":"s2b"}]},
-    {id:"s2a", img:"assets/scene2.svg", text:"Saat kotak dibuka di tengah pasar, muncul alat musik kecil dan surat. Pedagang dan anak-anak berkumpul untuk ikut bermain musik dan bernyanyi.", choices:[{text:"Ajak bermain bersama","goto":"s3"},{text:"Baca surat sendirian","goto":"s4"}]},
-    {id:"s2b", img:"assets/scene3.svg", text:"Siti membawa kotak pulang dan bertanya pada nenek. Nenek menceritakan tradisi gotong-royong saat perayaan pasar.", choices:[{text:"Pelajari dengan keluarga","goto":"s3"},{text:"Tanyakan tetangga","goto":"s5"}]},
-    {id:"s3", img:"assets/scene4.svg", text:"Warga pasar memainkan musik, berbagi makanan, dan saling membantu satu sama lain. Nilai gotong-royong dan kebersamaan menjadi nyata.", choices:[]},
-    {id:"s4", img:"assets/scene2.svg", text:"Siti membaca surat dan merekam cerita itu untuk diceritakan kembali ke teman-temannya esok hari.", choices:[{text:"Ajak teman besok","goto":"s3"}]},
-    {id:"s5", img:"assets/scene3.svg", text:"Tetangga bercerita tentang pasar malam dan tradisi yang dilakukan. Siti mengerti pentingnya menjaga kebudayaan.", choices:[{text:"Kembalikan kotak ke pasar","goto":"s3"}]}
+    {id:"s1", img:"assets/kelud1.svg", text:"Di pagi hari, Siti datang ke pasar tradisional Kediri. Ia menemukan sebuah kotak kayu yang berukir indah. Kotak itu membuat Siti ingin tahu tentang cerita di baliknya.<br><audio controls><source src='assets/narr_kelud1.wav' type='audio/wav'></audio>", choices:[{text:"Buka kotak bersama pedagang","goto":"s2a"},{text:"Bawa pulang dan tanya keluarga","goto":"s2b"}]},
+    {id:"s2a", img:"assets/kelud2.svg", text:"Saat kotak dibuka di tengah pasar, muncul alat musik kecil dan surat. Pedagang dan anak-anak berkumpul untuk ikut bermain musik dan bernyanyi.<br><audio controls><source src='assets/narr_kelud2.wav' type='audio/wav'></audio>", choices:[{text:"Ajak bermain bersama","goto":"s3"},{text:"Baca surat sendirian","goto":"s4"}]},
+    {id:"s2b", img:"assets/kelud3.svg", text:"Siti membawa kotak pulang dan bertanya pada nenek. Nenek menceritakan tradisi gotong-royong saat perayaan pasar.", choices:[{text:"Pelajari dengan keluarga","goto":"s3"},{text:"Tanyakan tetangga","goto":"s5"}]},
+    {id:"s3", img:"assets/kelud4.svg", text:"Warga pasar memainkan musik, berbagi makanan, dan saling membantu satu sama lain. Nilai gotong-royong dan kebersamaan menjadi nyata.", choices:[]},
+    {id:"s4", img:"assets/kelud2.svg", text:"Siti membaca surat dan merekam cerita itu untuk diceritakan kembali ke teman-temannya esok hari.", choices:[{text:"Ajak teman besok","goto":"s3"}]},
+    {id:"s5", img:"assets/kelud3.svg", text:"Tetangga bercerita tentang pasar malam dan tradisi yang dilakukan. Siti mengerti pentingnya menjaga kebudayaan.", choices:[{text:"Kembalikan kotak ke pasar","goto":"s3"}]}
   ]
 };
 
@@ -140,15 +142,13 @@ function $(s){return document.querySelector(s);}
 
 /* ---------- Story UI ---------- */
 function renderScene(id){
-  const sc = CURRENT_STORY.scenes.find(s=>s.id===id);
+  const sc = STORY.scenes.find(s=>s.id===id);
   const container = $('#scene-inner');
   container.innerHTML = '';
   if(!sc) return;
-  const left = el('div');
-  left.innerHTML = `<img src="${sc.img}" alt="Ilustrasi" style="width:100%;max-height:320px;border-radius:10px;object-fit:cover;margin-bottom:12px">
-    <h2 style="margin:6px 0">${CURRENT_STORY.title}</h2>
+  container.innerHTML = `<img src="${sc.img}" alt="Ilustrasi" style="width:100%;max-height:320px;border-radius:10px;object-fit:cover;margin-bottom:12px">
+    <h2 style="margin:6px 0">${STORY.title}</h2>
     <p style="font-size:16px">${sc.text}</p>`;
-  container.appendChild(left);
   const controls = $('#scene-controls');
   controls.innerHTML = sc.choices.map(c=>`<button class="choice" data-goto="${c.goto}">${c.text}</button>`).join('');
   controls.querySelectorAll('.choice').forEach(b=>b.addEventListener('click', ()=> renderScene(b.dataset.goto)));
@@ -172,15 +172,11 @@ function showGame(){
   $('#scene-inner').appendChild(wrap);
 
   const itemsDiv = $('#dnd-items'), targetsDiv = $('#dnd-targets');
-  itemsDiv.innerHTML = ''; targetsDiv.innerHTML = '';
-
-  const items = shuffle(DND_PAIRS.slice());
-  const targets = shuffle(DND_TARGETS.slice());
+  const items = shuffle(DND_PAIRS.slice()), targets = shuffle(DND_TARGETS.slice());
 
   items.forEach(it=>{
     const d = el('div', {class:'dnd-item', id:it.id});
-    d.textContent = it.label;
-    d.draggable = true;
+    d.textContent = it.label; d.draggable = true;
     d.addEventListener('dragstart', e=> e.dataTransfer.setData('text/plain', it.id));
     itemsDiv.appendChild(d);
   });
@@ -197,8 +193,7 @@ function showGame(){
         const clone = itemEl.cloneNode(true);
         clone.style.marginTop='8px'; clone.draggable=false;
         const existing = box.querySelector('.dnd-item'); if(existing) existing.remove();
-        box.appendChild(clone);
-        box.dataset.match = itemId;
+        box.appendChild(clone); box.dataset.match = itemId;
       }
     });
     targetsDiv.appendChild(box);
