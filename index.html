@@ -1,0 +1,273 @@
+<!doctype html>
+<html lang="id">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Alat Peraga Edukatif — Nilai Budaya Lokal Kediri</title>
+  <meta name="description" content="Alat peraga edukatif digital untuk PAUD/TK berbasis nilai budaya lokal Kediri — cerita interaktif, mini-game, dan kuis."/>
+  <link rel="icon" href="assets/logo.svg" />
+  <style>
+    :root{
+      --bg:#f8fafc; --card:#fff; --accent1:#0b5ed7; --accent2:#06b6d4; --muted:#6b7280;
+      --radius:14px; --flow:16px;
+    }
+    *{box-sizing:border-box}
+    html,body{height:100%}
+    body{margin:0;font-family:Inter, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;background:linear-gradient(180deg,var(--bg),#ffffff);color:#0f172a}
+    .container{max-width:1100px;margin:28px auto;padding:20px}
+    header{display:flex;gap:16px;align-items:center}
+    .logo{width:76px;height:76px;border-radius:16px;overflow:hidden;box-shadow:0 10px 30px rgba(11,78,215,0.08)}
+    h1{font-size:22px;margin:0}
+    p.lead{margin:6px 0 0;color:var(--muted)}
+    main{display:grid;grid-template-columns:1fr 320px;gap:18px;margin-top:18px}
+    .card{background:var(--card);padding:18px;border-radius:var(--radius);box-shadow:0 8px 24px rgba(12,74,110,0.04)}
+    nav .tab{display:inline-block;padding:8px 12px;border-radius:10px;background:transparent;border:1px solid rgba(11,78,215,0.08);cursor:pointer;margin-right:8px}
+    .scene{min-height:360px;border-radius:12px;overflow:hidden}
+    .scene .inner{padding:18px}
+    .controls{display:flex;gap:10px;flex-wrap:wrap;margin-top:12px}
+    .btn{cursor:pointer;padding:10px 14px;border-radius:10px;border:none;background:var(--accent1);color:white;font-weight:600}
+    .btn.ghost{background:transparent;color:var(--accent1);border:1px solid rgba(11,78,215,0.12)}
+    .choice{display:block;padding:10px 12px;border-radius:10px;border:1px solid #e9f2ff;background:#fcfeff;cursor:pointer;margin-bottom:8px}
+    .small{font-size:13px;color:var(--muted)}
+    aside .list{padding-left:16px}
+    .dnd-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+    .drop-target{min-height:64px;padding:12px;border-radius:10px;border:2px dashed #e6eefb;background:#fff}
+    .dnd-item{padding:10px;border-radius:10px;border:1px dashed #cbd5e1;background:#fcfeff;cursor:grab}
+    footer{margin-top:20px;text-align:center;color:var(--muted);font-size:13px}
+    @media (max-width:980px){main{grid-template-columns:1fr} .logo{width:56px;height:56px}}
+  </style>
+</head>
+<body>
+  <div class="container" role="main">
+    <header>
+      <img src="assets/logo.svg" class="logo" alt="Logo KD - Kediri">
+      <div>
+        <h1>Alat Peraga Edukatif — Nilai Budaya Lokal Kediri</h1>
+        <p class="lead">Prototipe untuk PAUD dan TK: cerita bergambar, mini-game, kuis reflektif — siap di-deploy ke GitHub/Vercel.</p>
+      </div>
+    </header>
+
+    <main>
+      <section>
+        <div class="card">
+          <nav aria-label="Menu">
+            <button class="tab" id="tab-story">Cerita Bergambar</button>
+            <button class="tab" id="tab-game">Mini-Game</button>
+            <button class="tab" id="tab-quiz">Kuis</button>
+            <button class="tab" id="tab-guide">Panduan Guru</button>
+          </nav>
+
+          <div id="scene" class="scene" aria-live="polite" tabindex="0">
+            <div class="inner" id="scene-inner">
+              <!-- content injected by JS -->
+            </div>
+          </div>
+
+          <div class="controls" id="scene-controls" role="toolbar" aria-label="Kontrol scene"></div>
+        </div>
+
+        <div class="card" style="margin-top:14px">
+          <h3 style="margin-top:0">Petunjuk Cepat</h3>
+          <ol class="small">
+            <li>Baca cerita bergambar bersama anak, beri kesempatan memilih jalan cerita.</li>
+            <li>Lakukan mini-game sebagai aktivitas kinestetik.</li>
+            <li>Kuis singkat untuk refleksi, gunakan hasil untuk observasi.</li>
+          </ol>
+        </div>
+      </section>
+
+      <aside>
+        <div class="card">
+          <h3 style="margin:0">Ringkasan Aktivitas</h3>
+          <ul class="small list">
+            <li><strong>Cerita:</strong> 4 scene bercabang, kosa kata budaya.</li>
+            <li><strong>Mini-Game:</strong> Match benda budaya → fungsi (drag & drop).</li>
+            <li><strong>Kuis:</strong> 5 pertanyaan, hasil langsung terlihat.</li>
+          </ul>
+        </div>
+
+        <div class="card" style="margin-top:14px">
+          <h4 style="margin:0">Deploy</h4>
+          <p class="small">Folder ini siap dipush ke GitHub. Untuk Vercel tidak diperlukan build step — tinggal import repository.</p>
+        </div>
+      </aside>
+    </main>
+
+    <footer>
+      Dibuat untuk penelitian: <strong>Model Pengembangan Alat Peraga Edukatif Digital berbasis Nilai Budaya Lokal — Kediri</strong>.
+    </footer>
+  </div>
+
+<script>
+/* ---------- Data (Bahasa Indonesia, cocok PAUD/TK) ---------- */
+const STORY = {
+  title: "Legenda Kotak Berukir Pasar Kediri",
+  scenes: [
+    {id:"s1", img:"assets/scene1.svg", text:"Di pagi hari, Siti datang ke pasar tradisional Kediri. Ia menemukan sebuah kotak kayu yang berukir indah. Kotak itu membuat Siti ingin tahu tentang cerita di baliknya.", choices:[{text:"Buka kotak bersama pedagang","goto":"s2a"},{text:"Bawa pulang dan tanya keluarga","goto":"s2b"}]},
+    {id:"s2a", img:"assets/scene2.svg", text:"Saat kotak dibuka di tengah pasar, muncul alat musik kecil dan surat. Pedagang dan anak-anak berkumpul untuk ikut bermain musik dan bernyanyi.", choices:[{text:"Ajak bermain bersama","goto":"s3"},{text:"Baca surat sendirian","goto":"s4"}]},
+    {id:"s2b", img:"assets/scene3.svg", text:"Siti membawa kotak pulang dan bertanya pada nenek. Nenek menceritakan tradisi gotong-royong saat perayaan pasar.", choices:[{text:"Pelajari dengan keluarga","goto":"s3"},{text:"Tanyakan tetangga","goto":"s5"}]},
+    {id:"s3", img:"assets/scene4.svg", text:"Warga pasar memainkan musik, berbagi makanan, dan saling membantu satu sama lain. Nilai gotong-royong dan kebersamaan menjadi nyata.", choices:[]},
+    {id:"s4", img:"assets/scene2.svg", text:"Siti membaca surat dan merekam cerita itu untuk diceritakan kembali ke teman-temannya esok hari.", choices:[{text:"Ajak teman besok","goto":"s3"}]},
+    {id:"s5", img:"assets/scene3.svg", text:"Tetangga bercerita tentang pasar malam dan tradisi yang dilakukan. Siti mengerti pentingnya menjaga kebudayaan.", choices:[{text:"Kembalikan kotak ke pasar","goto":"s3"}]}
+  ]
+};
+
+const DND_PAIRS = [
+  {id:'item1', label:'Gamelan Mini (Alat Musik)', match:'fungsi1'},
+  {id:'item2', label:'Keris (Simbol)', match:'fungsi2'},
+  {id:'item3', label:'Anyaman Piring', match:'fungsi3'},
+  {id:'item4', label:'Wayang (Cerita)', match:'fungsi4'}
+];
+
+const DND_TARGETS = [
+  {id:'fungsi1', label:'Untuk memainkan musik upacara'},
+  {id:'fungsi2', label:'Simbol perlindungan/cerita'},
+  {id:'fungsi3', label:'Digunakan saat berbagi makanan'},
+  {id:'fungsi4', label:'Media bercerita dan pendidikan nilai'}
+];
+
+const QUIZ = [
+  {q:'Sebutkan satu nilai budaya dalam cerita?', options:['Gotong-royong','Individualisme','Hanya menyimpan sendiri'], a:0},
+  {q:'Apa fungsi wayang menurut cerita?', options:['Mendidik dan bercerita','Untuk memasak','Mainan saja'], a:0},
+  {q:'Kapan waktu tepat mengajarkan nilai budaya?', options:['Saat bermain dan bercerita','Saat tidur saja','Tidak perlu'], a:0},
+  {q:'Siapa tokoh utama cerita?', options:['Siti','Budi','Joko'], a:0},
+  {q:'Aktivitas untuk menanamkan berbagi?', options:['Membagi makanan','Menyimpan mainan sendiri','Berlomba'], a:0}
+];
+
+/* ---------- Helpers ---------- */
+function el(k, attrs={}, inner=''){ const e = document.createElement(k); for(const a in attrs) e.setAttribute(a, attrs[a]); if(typeof inner==='string') e.innerHTML = inner; else if(inner) e.appendChild(inner); return e; }
+function $(s){return document.querySelector(s);}
+
+/* ---------- Story UI ---------- */
+function renderScene(id){
+  const sc = STORY.scenes.find(s=>s.id===id);
+  const container = $('#scene-inner');
+  container.innerHTML = '';
+  if(!sc) return;
+  const left = el('div');
+  left.innerHTML = `<img src="${sc.img}" alt="Ilustrasi" style="width:100%;max-height:320px;border-radius:10px;object-fit:cover;margin-bottom:12px">
+    <h2 style="margin:6px 0">${STORY.title}</h2>
+    <p style="font-size:16px">${sc.text}</p>`;
+  container.appendChild(left);
+  const controls = $('#scene-controls');
+  controls.innerHTML = sc.choices.map(c=>`<button class="choice" data-goto="${c.goto}">${c.text}</button>`).join('');
+  controls.querySelectorAll('.choice').forEach(b=>b.addEventListener('click', ()=> renderScene(b.dataset.goto)));
+  if(sc.choices.length===0){
+    controls.innerHTML = '<button class="btn" id="btn-restart">Kembali ke Awal</button>';
+    $('#btn-restart').addEventListener('click', ()=> renderScene('s1'));
+  }
+}
+
+/* ---------- Game UI (drag & drop) ---------- */
+function showGame(){
+  $('#scene-inner').innerHTML = '';
+  $('#scene-controls').innerHTML = '';
+  const wrap = el('div');
+  wrap.innerHTML = `<h2>Mini-Game: Cocokkan benda budaya</h2><p class="small">Tarik benda ke fungsi yang sesuai.</p>
+    <div class="dnd-grid" style="margin-top:12px">
+      <div id="dnd-items"></div>
+      <div id="dnd-targets"></div>
+    </div>
+    <div style="margin-top:10px"><button class="btn" id="check-btn">Periksa Jawaban</button> <span id="dnd-result" class="small" aria-live="polite" style="margin-left:8px"></span></div>`;
+  $('#scene-inner').appendChild(wrap);
+
+  const itemsDiv = $('#dnd-items'), targetsDiv = $('#dnd-targets');
+  itemsDiv.innerHTML = ''; targetsDiv.innerHTML = '';
+
+  const items = shuffle(DND_PAIRS.slice());
+  const targets = shuffle(DND_TARGETS.slice());
+
+  items.forEach(it=>{
+    const d = el('div', {class:'dnd-item', id:it.id});
+    d.textContent = it.label;
+    d.draggable = true;
+    d.addEventListener('dragstart', e=> e.dataTransfer.setData('text/plain', it.id));
+    itemsDiv.appendChild(d);
+  });
+
+  targets.forEach(t=>{
+    const box = el('div', {class:'drop-target', id:t.id});
+    box.innerHTML = `<strong>${t.label}</strong><div class="small">(Tarik ke sini)</div>`;
+    box.addEventListener('dragover', e=> e.preventDefault());
+    box.addEventListener('drop', e=> {
+      e.preventDefault();
+      const itemId = e.dataTransfer.getData('text/plain');
+      const itemEl = document.getElementById(itemId);
+      if(itemEl){
+        const clone = itemEl.cloneNode(true);
+        clone.style.marginTop='8px'; clone.draggable=false;
+        const existing = box.querySelector('.dnd-item'); if(existing) existing.remove();
+        box.appendChild(clone);
+        box.dataset.match = itemId;
+      }
+    });
+    targetsDiv.appendChild(box);
+  });
+
+  $('#check-btn').addEventListener('click', ()=>{
+    let correct = 0;
+    targets.forEach(t=>{
+      const box = document.getElementById(t.id);
+      const match = box.dataset.match;
+      if(match){
+        const pair = DND_PAIRS.find(p=>p.id===match);
+        if(pair && pair.match===t.id) correct++;
+      }
+    });
+    $('#dnd-result').textContent = `Skor: ${correct} / ${targets.length}`;
+  });
+}
+
+/* ---------- Quiz UI ---------- */
+function showQuiz(){
+  $('#scene-inner').innerHTML = '';
+  $('#scene-controls').innerHTML = '';
+  const form = el('form', {id:'quiz-form'});
+  let html = '<h2>Kuis Refleksi</h2>';
+  QUIZ.forEach((qq,i)=>{
+    html += `<div style="margin-bottom:12px"><strong>${i+1}. ${qq.q}</strong>`;
+    qq.options.forEach((opt,j)=>{
+      html += `<label style="display:block;margin-top:6px"><input type="radio" name="q${i}" value="${j}"> ${opt}</label>`;
+    });
+    html += '</div>';
+  });
+  html += `<div><button type="button" class="btn" id="submit-quiz">Kirim Jawaban</button> <span id="quiz-result" class="small" style="margin-left:8px" aria-live="polite"></span></div>`;
+  form.innerHTML = html;
+  $('#scene-inner').appendChild(form);
+  $('#submit-quiz').addEventListener('click', ()=>{
+    let score = 0;
+    QUIZ.forEach((qq,i)=>{
+      const sel = document.querySelector('input[name=q'+i+']:checked');
+      if(sel && parseInt(sel.value) === qq.a) score++;
+    });
+    $('#quiz-result').textContent = `Nilai: ${score} / ${QUIZ.length}`;
+  });
+}
+
+/* ---------- Guide UI ---------- */
+function showGuide(){
+  $('#scene-inner').innerHTML = `<h2>Panduan untuk Pengajar PAUD/TK</h2>
+    <ol class="small">
+      <li>Persiapan: Siapkan ilustrasi dan atur lingkungan aman.</li>
+      <li>Pelaksanaan: Bacakan cerita, ajak anak memilih jalan cerita, lakukan mini-game berkelompok.</li>
+      <li>Refleksi: Gunakan pertanyaan sederhana, minta anak mencontoh tindakan tolong-menolong.</li>
+      <li>Penilaian: Observasi partisipasi, kosa kata, dan kemampuan berbagi—catat dalam rubrik singkat.</li>
+    </ol>
+    <p class="small">Catatan: Ganti gambar di folder <code>assets/</code> untuk menyesuaikan dengan materi lokal Anda.</p>`;
+  $('#scene-controls').innerHTML = '';
+}
+
+/* ---------- Utilities ---------- */
+function shuffle(a){ for(let i=a.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[a[i],a[j]]=[a[j],a[i]];} return a; }
+
+/* ---------- Init & Navigation ---------- */
+document.getElementById('tab-story').addEventListener('click', ()=> renderScene('s1'));
+document.getElementById('tab-game').addEventListener('click', ()=> showGame());
+document.getElementById('tab-quiz').addEventListener('click', ()=> showQuiz());
+document.getElementById('tab-guide').addEventListener('click', ()=> showGuide());
+
+// Start with story
+renderScene('s1');
+</script>
+</body>
+</html>

@@ -1,0 +1,11 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="720" viewBox="0 0 1200 720">
+  <rect width="100%" height="100%" fill="#FFF7F0"/>
+  <g transform="translate(60,60)">
+    <rect width="1080" height="600" rx="20" fill="#FFF" stroke="#FFE7D9" stroke-width="6"/>
+    <text x="540" y="110" font-size="44" font-weight="700" text-anchor="middle" fill="#D97706">Kebersamaan Keluarga</text>
+    <g transform="translate(80,150)">
+      <rect x="0" y="0" width="980" height="220" rx="18" fill="#FEF3C7"/>
+      <text x="20" y="60" font-size="28" fill="#92400E">Nenek menceritakan sejarah kotak berukir</text>
+    </g>
+  </g>
+</svg>
