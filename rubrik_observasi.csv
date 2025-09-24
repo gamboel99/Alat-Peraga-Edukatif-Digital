@@ -1,4 +1,5 @@
 indikator,deskripsi,skor0,skor1,skor2
-partisipasi,"Partisipasi aktif saat bercerita/play",Tidak aktif,Ikut pas dipanggil,Selalu ikut
-kosakata,"Penggunaan kosakata budaya",Tidak tampak,Memakai 1-2 kata,Memakai >3 kata
-berbagi,"Tindakan berbagi dengan teman",Tidak berbagi,Berbagi sekali,Sering berbagi
+partisipasi,Partisipasi aktif saat bercerita/play,Tidak aktif,Ikut pas dipanggil,Selalu ikut
+kosakata,Penggunaan kosakata budaya,Tidak tampak,Memakai 1-2 kata,Memakai >3 kata
+berbagi,Tindakan berbagi dengan teman,Tidak berbagi,Berbagi sekali,Sering berbagi
+kolaborasi,Bekerja sama dalam permainan,Tidak ada,Bekerjasama sebagian,Bekerjasama penuh

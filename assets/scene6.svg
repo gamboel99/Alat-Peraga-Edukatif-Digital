@@ -1,0 +1,15 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="720" viewBox="0 0 1200 720">
+  <style>
+    .shine { animation: shine 2s linear infinite; }
+    @keyframes shine { 0%{opacity:0.6}50%{opacity:1}100%{opacity:0.6} }
+  </style>
+  <rect width="100%" height="100%" fill="#F0FFF7"/>
+  <g transform="translate(60,40)">
+    <rect width="1080" height="640" rx="20" fill="#FFF" stroke="#D1FAE5" stroke-width="6"/>
+    <text x="540" y="100" font-size="44" font-weight="700" text-anchor="middle" fill="#059669">Mengenal Pakaian Tradisional</text>
+    <g transform="translate(80,140)">
+      <rect x="20" y="20" width="220" height="320" rx="12" fill="#E6FFFA" class="shine"/>
+      <text x="280" y="180" font-size="26" fill="#065F46">Baju daerah yang dipakai saat upacara</text>
+    </g>
+  </g>
+</svg>

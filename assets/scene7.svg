@@ -1,0 +1,15 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="720" viewBox="0 0 1200 720">
+  <style>
+    .move { animation: move 4s linear infinite; }
+    @keyframes move { 0%{transform:translateX(0)}50%{transform:translateX(6px)}100%{transform:translateX(0)} }
+  </style>
+  <rect width="100%" height="100%" fill="#FFF8FF"/>
+  <g transform="translate(60,40)">
+    <rect width="1080" height="640" rx="20" fill="#FFF" stroke="#F5D0FE" stroke-width="6"/>
+    <text x="540" y="100" font-size="44" font-weight="700" text-anchor="middle" fill="#7C3AED">Wayang & Cerita Rakyat</text>
+    <g transform="translate(80,140)">
+      <rect x="20" y="20" width="360" height="320" rx="12" fill="#FFF4FF"/>
+      <text x="420" y="180" font-size="26" fill="#4C1D95">Cara menceritakan legend kepada anak</text>
+    </g>
+  </g>
+</svg>

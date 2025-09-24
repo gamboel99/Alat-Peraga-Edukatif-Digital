@@ -30,3 +30,8 @@ git push -u origin main
 
 ## Lisensi
 Gunakan bebas untuk tujuan penelitian dan pendidikan. Mohon cantumkan sumber jika dipublikasikan.
+
+## Kepemilikan Produk
+
+Pemilik produk: **INTAN PRASTIHASTARI WIJAYA** bekerjasama dengan **CV. Mitra Utama Consultindo**.
+
