@@ -140,13 +140,13 @@ function $(s){return document.querySelector(s);}
 
 /* ---------- Story UI ---------- */
 function renderScene(id){
-  const sc = STORY.scenes.find(s=>s.id===id);
+  const sc = CURRENT_STORY.scenes.find(s=>s.id===id);
   const container = $('#scene-inner');
   container.innerHTML = '';
   if(!sc) return;
   const left = el('div');
   left.innerHTML = `<img src="${sc.img}" alt="Ilustrasi" style="width:100%;max-height:320px;border-radius:10px;object-fit:cover;margin-bottom:12px">
-    <h2 style="margin:6px 0">${STORY.title}</h2>
+    <h2 style="margin:6px 0">${CURRENT_STORY.title}</h2>
     <p style="font-size:16px">${sc.text}</p>`;
   container.appendChild(left);
   const controls = $('#scene-controls');
